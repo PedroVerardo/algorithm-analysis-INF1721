@@ -8,10 +8,12 @@ def LinearSelection(A, k):
         print("Erro: valor 'k' inválido")
         return
 
+    # print(f"{k=} {A=}")
     if n <= 5:
         _A = A.copy()
         _A.sort()
-        return A[k-1]
+        # print(f"{_A=}")
+        return _A[k-1]
 
     grupos = []
     M=[]
@@ -27,10 +29,12 @@ def LinearSelection(A, k):
         grupos.append(grupo)
         M.append(grupo[len(grupo)//2])
 
-    print(grupos)
-    print(M)
-    _m = LinearSelection(M, len(M)//2)
-    print(_m)
+    # print(grupos)
+    # print(M)
+
+    _m = LinearSelection(M, (len(M)+1)//2)
+
+    # print(_m)
 
     L = []
     R = []
@@ -43,6 +47,8 @@ def LinearSelection(A, k):
             R.append(i)
         else:
             count += 1
+    
+    # print(f"{L=} {R=}")
 
     if len(L) == k-1:
         return _m
@@ -59,8 +65,8 @@ A = [16, 9, 13, 5, 12, 19, 1, 10, 8, 17, 11, 3, 6, 22, 7, 15, 21, 2, 20, 14, 18,
 
 print(A)
 
-print(LinearSelection(A,2))
-"""
+print(LinearSelection(A,4))
+#"""
 for k in range(1,len(A)+1):
 
     num = LinearSelection(A,k)
@@ -68,4 +74,4 @@ for k in range(1,len(A)+1):
     print(num)
     if num != k:
         print("Erro")
-"""
+#"""
