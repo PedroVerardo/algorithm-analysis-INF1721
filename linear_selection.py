@@ -1,4 +1,6 @@
 import random
+from sort import bubbleSort
+
 
 def LinearSelection(A, k):
     n = len(A)
@@ -8,28 +10,25 @@ def LinearSelection(A, k):
 
     if n <= 5:
         _A = A.copy()
-        _A.sort()
+        _A = bubbleSort(_A)
         return _A[k-1]
 
-    grupos = []
-    M=[]
+    M=[] # Lista de medianas
     for i in range(n//5):
         grupo = A[5*i:5*i+5]
-        grupo.sort() # Trocar
-        grupos.append(grupo)
+        grupo = bubbleSort(grupo)
         M.append(grupo[2])
     
     if n%5 != 0:
         grupo = A[5*i+5:]
-        grupo.sort() # Trocar
-        grupos.append(grupo)
+        grupo = bubbleSort(grupo)
         M.append(grupo[len(grupo)//2])
 
     _m = LinearSelection(M, (len(M)+1)//2)
 
-    L = []
-    R = []
-    count = 0
+    L = [] # Lista de elementos menores que _m
+    R = [] # Lista de elementos maiores que _m
+    count = 0 # Contador de elementos iguais a _m
 
     for i in A:
         if i < _m:
@@ -48,16 +47,20 @@ def LinearSelection(A, k):
     else:
         return LinearSelection(R, k-len(L)-count)
 
-    
-A=[x+1 for x in range(22)]
-random.shuffle(A)
 
-#"""
-for k in range(1,len(A)+1):
+if __name__ == "__main__":
+    def SortSelection(A: list, k: int) -> int:
+        _a = A.copy()
+        _a.sort()
+        return _a[k-1]
+    #"""
+    A=[random.randint(0,100) for x in range(1000)]
+    for k in range(1,len(A)+1):
 
-    num = LinearSelection(A,k)
-    if num != k:
-        print("Erro")
-    else:
-        print("OK")
-#"""
+        result = SortSelection(A,k)
+        num = LinearSelection(A,k)
+        if num != result:
+            print("Erro")
+        else:
+            print("OK")
+    #"""
