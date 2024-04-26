@@ -58,10 +58,13 @@ def compare_algos(selection1,
         print("\n")
 
     plt.plot(range(10), time_selection1, label='Selection 1', c="blue")
-    plt.plot(range(10), time_selection2, label='Selection 2', linestyle='dashed', c="red")
     plt.title('Time comparison')
     plt.xlabel('n')
     plt.ylabel('Time')
+    plt.savefig('linear.png', dpi=500)
+    plt.plot(range(10), time_selection2, label='Selection 2', linestyle='dashed', c="red")
+    plt.savefig('sort.png', dpi=500)
+    
     plt.show()
     
     return 0
